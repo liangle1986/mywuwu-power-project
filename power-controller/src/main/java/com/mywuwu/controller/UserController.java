@@ -46,6 +46,7 @@ public class UserController extends BaseController {
     @GetMapping("/authorityList")
     @PreAuthorize("hasAuthority('MAIN_USER')")
     public List<String> authorityList(){
+
         List<String> authentication = getAuthentication();
         return authentication;
     }
