@@ -31,7 +31,7 @@ public class RegisterController extends BaseController {
     @ApiOperation(value = "注册用户")
     @PostMapping("/signup")
     public WuwuUser signup(@RequestBody WuwuUser user) {
-        WuwuUser bizUser = userDetailsService.findByUsername(user.getUserName());
+        WuwuUser bizUser = userDetailsService.findByUsername(user.getUserName(), "");
         if(null != bizUser){
             throw new UsernameIsExitedException("用户已经存在");
         }

@@ -8,12 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class PowerServiceApplication extends SpringBootServletInitializer {
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(MywuwuDaoApplication.class);
-    }
+public class PowerServiceApplication {
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

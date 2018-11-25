@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService, IUserDetailsS
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        WuwuUser user = userMapper.findByUsername(username);
+        WuwuUser user = userMapper.findByUsername(username, "");
         if(user == null){
             throw new UsernameNotFoundException(username);
         }
@@ -35,9 +35,9 @@ public class UserDetailsServiceImpl implements UserDetailsService, IUserDetailsS
     }
 
     @Override
-    public WuwuUser findByUsername(String username) {
+    public WuwuUser findByUsername(String username, String password) {
 
-        return  userMapper.findByUsername(username);
+        return  userMapper.findByUsername(username, password);
     }
     @Override
     public List<WuwuUser> selectAll(){

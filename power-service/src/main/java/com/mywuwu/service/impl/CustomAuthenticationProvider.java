@@ -41,7 +41,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String name = authentication.getName();
         String password = authentication.getCredentials().toString();
         // 认证逻辑
-        WuwuUser userDetails = userDetailsService.findByUsername(name);
+        WuwuUser userDetails = userDetailsService.findByUsername(name, "");
         if (null != userDetails) {
             if (bCryptPasswordEncoder.matches(password, userDetails.getPassword())) {
                 // 这里设置权限和角色

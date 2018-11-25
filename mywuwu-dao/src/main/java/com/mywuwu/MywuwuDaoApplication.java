@@ -19,30 +19,10 @@ import java.util.List;
 @SpringBootApplication
 @MapperScan("com.mywuwu.dao")
 @Import(DynamicDataSourceRegister.class)
-@RestController
-public class MywuwuDaoApplication extends SpringBootServletInitializer {
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(MywuwuDaoApplication.class);
-    }
+public class MywuwuDaoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(MywuwuDaoApplication.class, args);
     }
 
-    @Autowired
-    private WuwuUserMapper wuwuUserMapper;
-
-    @GetMapping("select1")
-    @TargetDataSource("ds")
-    public List<WuwuUser> select1() {
-        return wuwuUserMapper.selectAll();
-    }
-
-    @GetMapping("select2")
-    @TargetDataSource("ds1")
-    public List<WuwuUser> select2() {
-        return wuwuUserMapper.selectAll();
-    }
 }

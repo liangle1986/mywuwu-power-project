@@ -19,8 +19,16 @@
     <result column="lock_type" jdbcType="INTEGER" property="lockType" />
   </resultMap>
 
+  <!--根据用户名密码查询用户信息-->
   <select id="findByUsername" resultMap="BaseResultMap" parameterType="String">
-    select * from  wuwu_user where login_Name = #{username}
-
+    select * from  wuwu_user
+    <trim prefix="WHERE" prefixOverrides="AND">
+      <if test="username != null">
+       AND login_Name=#{username}
+      </if>
+      <if test="password != null">
+       AND password=#{password}
+      </if>
+    </trim>
   </select>
 </mapper>

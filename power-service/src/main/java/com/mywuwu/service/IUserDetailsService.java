@@ -17,19 +17,20 @@ import java.util.List;
  */
 public interface IUserDetailsService {
     /**
-     * @Description： 查询用户信息
      * @param username 用户名
+     * @param password 密码
+     * @return com.mywuwu.entity.WuwuUser
+     * @Description： 查询用户信息
      * @Author: 梁乐乐
      * @Date: Created in 2018/8/27 21:54
-     * @return com.mywuwu.entity.WuwuUser
      */
-    WuwuUser findByUsername(String username);
+    WuwuUser findByUsername(String username, String password);
 
     /**
+     * @return
      * @Description： 查询所有用户
      * @Author: 梁乐乐
      * @Date: Created in 2018/8/27 21:58
-     * @return
      */
     List<WuwuUser> selectAll();
 }

@@ -5,5 +5,5 @@ import com.mywuwu.entity.WuwuUser;
 
 public interface WuwuUserMapper extends MyMapper<WuwuUser> {
 
-   WuwuUser findByUsername(String username);
+   WuwuUser findByUsername(String username, String password);
 }

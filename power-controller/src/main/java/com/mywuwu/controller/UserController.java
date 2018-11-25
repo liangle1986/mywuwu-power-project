@@ -1,12 +1,11 @@
 package com.mywuwu.controller;
 
+import com.mywuwu.entity.User;
 import com.mywuwu.entity.WuwuUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 @Api(value = "用户管理", description = "用户管理")
 public class UserController extends BaseController {
 
@@ -46,9 +46,12 @@ public class UserController extends BaseController {
     @GetMapping("/authorityList")
     @PreAuthorize("hasAuthority('MAIN_USER')")
     public List<String> authorityList(){
-
         List<String> authentication = getAuthentication();
         return authentication;
     }
 
+    @GetMapping("test")
+    public User test() {
+        return null;
+    }
 }

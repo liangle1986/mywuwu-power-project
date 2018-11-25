@@ -11,15 +11,10 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Package: com.mywuwu.controller
@@ -32,6 +27,7 @@ import java.util.List;
  * @Modified By:
  */
 @RestController
+@CrossOrigin
 @Api(value = "登录管理", description = "登录管理")
 public class LoginController extends BaseController {
 
@@ -39,8 +35,11 @@ public class LoginController extends BaseController {
     @ApiOperation(value = "自定义登录")
     @GetMapping(value = "/login")
 //    @PreAuthorize("hasAuthority('ROLE_USER')")
-    public void login(@Param("username") String username, String password, HttpServletResponse response) {
-        WuwuUser userVo = userDetailsService.findByUsername(username);
+    public Map<String, String> login(@Param("username") String username, String password, HttpServletResponse response) {
+        WuwuUser userVo = userDetailsService.findByUsername(username, password);
+        Map<String, String> resultMap = new HashMap<>();
+        resultMap.put("success", "true");
+        resultMap.put("message", "登录失败，请重新再试。");
         if (userVo != null) {
 
             /**
@@ -60,6 +59,13 @@ public class LoginController extends BaseController {
                     .compact();*/
             // 登录成功后，返回token到header里面
             response.addHeader("Authorization", "Bearer " + token);
+            resultMap.put("code", userVo.getId() + "");
+            resultMap.put("token", token);
+            return  resultMap;
+        } else {
+            resultMap.put("success", "false");
+            resultMap.put("message", "用户名密码错误，请重新再试。");
         }
+        return null;
     }
 }
